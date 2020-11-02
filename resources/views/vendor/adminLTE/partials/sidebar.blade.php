@@ -31,7 +31,7 @@
         </li>
         <li class="nav-item">
           <a href="{{ Route('kandidat') }}" class="nav-link {{ request()->is('dashboard/kandidat', 'dashboard/kandidat/add') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-user"></i>
+            <i class="nav-icon fas fa-user-tie"></i>
             <p>
               Data Kandidat
             </p>
