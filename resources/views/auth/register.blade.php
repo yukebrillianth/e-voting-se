@@ -1,11 +1,14 @@
-@extends('layouts.app')
+@extends('vendor.adminLTE.guest.auth')
 
 @section('content')
-<div class="container">
+<div class="container"><br><br><br><br><br>
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <div class="login-logo">
+                <img src="{{ asset('img/brand/logo-white.png')}}" width="250ex" alt="Logo-E-Voting" srcset="">
+            </div><br>
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Registrasi Akun') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -64,7 +67,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Buat Akun') }}
                                 </button>
                             </div>
                         </div>

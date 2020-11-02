@@ -46,7 +46,7 @@
         </form>
   
         <p class="mb-0">
-          <a href="{{Route('register')}}" class="text-center d-none">{{__('Register a new membership')}}</a>
+          <a href="{{ $site_settings->enable_register == false ? '' : Route('register') }}" class="text-center {{ $site_settings->enable_register == true ? '' : 'd-none' }}">{{__('Registrasi Pengguna Baru')}}</a>
         </p>
       </div>
       <!-- /.login-card-body -->
