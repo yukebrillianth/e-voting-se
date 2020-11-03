@@ -41,5 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [RedirectorController::class, 'index'])->name('home');
     Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('dashboard/kandidat', [CandidateController::class, 'index'])->name('kandidat');
+    Route::get('dashboard/kandidat/add', [CandidateController::class, 'add'])->name('tambahKandidat');
+    Route::post('dashboard/kandidat/', [CandidateController::class, 'store'])->name('storeKandidat');
     Route::get('formulir', [FormController::class, 'index'])->name('formulir');
 });

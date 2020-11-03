@@ -18,6 +18,6 @@ class AdminController extends Controller
         if (Auth::user()->role != 'super admin' && 'pengawas') {
             return abort(404);
         }
-        return view('dashboard.home');
+        return view('dashboard.index');
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "81f371e05e2109c8c53da3696567a28f",
+    "content-hash": "0ff190b898dde4bc66a368668623ede3",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,60 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.0.2"
             },
             "time": "2020-10-29T16:03:21+00:00"
+        },
+        {
+            "name": "brackets/craftable-installer",
+            "version": "v1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BRACKETS-by-TRIAD/craftable-installer.git",
+                "reference": "8a3d6476a1a2985d1a3b0795a65f41ab6603de3e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BRACKETS-by-TRIAD/craftable-installer/zipball/8a3d6476a1a2985d1a3b0795a65f41ab6603de3e",
+                "reference": "8a3d6476a1a2985d1a3b0795a65f41ab6603de3e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-zip": "*",
+                "symfony/console": "~3.0|~4.0|~5.0",
+                "symfony/process": "~3.0|~4.0|~5.0"
+            },
+            "bin": [
+                "craftable"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Brackets\\CraftableInstaller\\Console\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pavol Perdík",
+                    "email": "pavol.perdik@brackets.sk"
+                },
+                {
+                    "name": "David Běhal",
+                    "email": "david.behal@brackets.sk"
+                }
+            ],
+            "description": "Craftable application installer.",
+            "keywords": [
+                "admin",
+                "craftable",
+                "crud"
+            ],
+            "support": {
+                "issues": "https://github.com/BRACKETS-by-TRIAD/craftable-installer/issues",
+                "source": "https://github.com/BRACKETS-by-TRIAD/craftable-installer/tree/v1.3.1"
+            },
+            "time": "2020-05-05T08:00:02+00:00"
         },
         {
             "name": "brick/math",

@@ -18,7 +18,7 @@ class CreateCandidatesTable extends Migration
             $table->string('nama_kandidat')->nullable(false);
             $table->longText('visi');
             $table->longText('misi');
-            $table->string('foto');
+            $table->string('image');
             $table->integer('jumlah_pemilih')->default(0);
             $table->unsignedBigInteger('class_id')->nullable();
             $table->foreign('class_id')
