@@ -117,7 +117,13 @@ class ParticipantController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (Auth::user()->role != 'super admin') {
+            return abort(404);
+        }
+        $class = kelas::all();
+        $data = Participant::where('id', $id)->first();
+
+        return view('dashboard.peserta.edit', compact('data', 'class'));
     }
 
     /**

@@ -62,8 +62,8 @@
                 <td>{{ $item->class->class_name }}</td>
                 <td>{{ $item->has_voted == true ? "Sudah Memilih" : "Belum Memilih" }}</td>
                 <td>
-                  <a href="{{ Route('editKandidat', ['id' => $item->id]) }}" class="badge badge-success text-white" role="button">Ubah</a>
-                  <a href="{{ Route('editKandidat', ['id' => $item->id]) }}" class="badge badge-warning text-white" role="button">Blacklist</a>
+                  <a href="{{ Route('editPeserta', ['id' => $item->id]) }}" class="badge badge-success text-white" role="button">Ubah</a>
+                  <a href="{{ Route('blacklistPeserta', ['id' => $item->id]) }}" class="badge badge-warning text-white" role="button">Blacklist</a>
                   <a href="#" class="badge badge-danger btn-del text-white" id="singledel" data-id="{{ $item->id }}" role="button">Hapus</a>
                 </td>
               </tr>

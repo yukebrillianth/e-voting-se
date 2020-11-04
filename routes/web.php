@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/', [ParticipantController::class, 'store'])->name('storePeserta');
             Route::delete('/', [ParticipantController::class, 'deleteAll'])->name('deleteAll');
             Route::delete('{id}', [ParticipantController::class, 'destroy'])->name('deletePeserta');
+            Route::put('{id}', [ParticipantController::class, 'blacklist'])->name('blacklistPeserta');
             Route::get('edit/{id}', [ParticipantController::class, 'edit'])->name('editPeserta');
             Route::put('edit/{id}', [ParticipantController::class, 'update'])->name('putPeserta');
         });
