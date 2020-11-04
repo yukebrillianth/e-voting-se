@@ -94,10 +94,6 @@
 <script src="{{ asset('adminLTE/dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('adminLTE/dist/js/demo.js')}}"></script>
-<!-- Bootstrap 4 -->
-<script src="{{ asset('/adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 @stack('scripts')
-<!-- AdminLTE App -->
-<script src="{{ asset('adminLTE/dist/js/adminlte.min.js')}}"></script>
 </body>
 </html>

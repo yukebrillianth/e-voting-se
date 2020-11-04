@@ -4,7 +4,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\RedirectorController;
+use App\Http\Controllers\UserController;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -41,15 +43,30 @@ Route::get('bantuan', function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [RedirectorController::class, 'index'])->name('/');
     Route::get('/home', [RedirectorController::class, 'index'])->name('home');
+    Route::get('logout', function () {
+        Auth::logout();
+        return redirect()->route('login');
+    });
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('dashboard');
-        Route::get('kandidat', [CandidateController::class, 'index'])->name('kandidat');
-        Route::get('kandidat/add', [CandidateController::class, 'create'])->name('tambahKandidat');
-        Route::post('kandidat/', [CandidateController::class, 'store'])->name('storeKandidat');
-        Route::delete('kandidat/', [CandidateController::class, 'deleteAll'])->name('deleteAll');
-        Route::delete('kandidat/{id}', [CandidateController::class, 'destroy'])->name('deleteKandidat');
-        Route::get('kandidat/edit/{id}', [CandidateController::class, 'edit'])->name('editKandidat');
-        Route::put('kandidat/edit/{id}', [CandidateController::class, 'update'])->name('putKandidat');
+        Route::prefix('kandidat')->group(function () {
+            Route::get('/', [CandidateController::class, 'index'])->name('kandidat');
+            Route::get('add', [CandidateController::class, 'create'])->name('tambahKandidat');
+            Route::post('/', [CandidateController::class, 'store'])->name('storeKandidat');
+            Route::delete('/', [CandidateController::class, 'deleteAll'])->name('deleteAll');
+            Route::delete('{id}', [CandidateController::class, 'destroy'])->name('deleteKandidat');
+            Route::get('edit/{id}', [CandidateController::class, 'edit'])->name('editKandidat');
+            Route::put('edit/{id}', [CandidateController::class, 'update'])->name('putKandidat');
+        });
+        Route::prefix('peserta')->group(function () {
+            Route::get('/', [ParticipantController::class, 'index'])->name('peserta');
+            Route::get('add', [ParticipantController::class, 'create'])->name('tambahPeserta');
+            Route::post('/', [ParticipantController::class, 'store'])->name('storePeserta');
+            Route::delete('/', [ParticipantController::class, 'deleteAll'])->name('deleteAll');
+            Route::delete('{id}', [ParticipantController::class, 'destroy'])->name('deletePeserta');
+            Route::get('edit/{id}', [ParticipantController::class, 'edit'])->name('editPeserta');
+            Route::put('edit/{id}', [ParticipantController::class, 'update'])->name('putPeserta');
+        });
     });
     Route::get('formulir', [FormController::class, 'index'])->name('formulir');
 });

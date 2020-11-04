@@ -7,6 +7,7 @@ use App\Models\kelas;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -228,7 +229,9 @@ class CandidateController extends Controller
         foreach ($files as $file) {
             Storage::delete(['public/' . $file->image]);
         }
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Candidate::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         Alert::success('Data berhasil dihapus!');
         return redirect()->back();

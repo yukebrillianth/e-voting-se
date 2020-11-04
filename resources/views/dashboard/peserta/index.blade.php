@@ -1,16 +1,16 @@
 @extends('vendor.adminLTE.master')
 
-@section('title', 'Data Kandidat')
+@section('title', 'Data Peserta')
 
 @section('header')
 <div class="row mb-2" id="header">
   <div class="col-sm-6">
-    <h1 class="m-0 text-dark">Data Kandidat</h1>
+    <h1 class="m-0 text-dark">Data Peserta</h1>
   </div><!-- /.col -->
   <div class="col-sm-6">
     <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="{{ Route('/') }}">Home</a></li>
-      <li class="breadcrumb-item active">Data Kandidat</li>
+      <li class="breadcrumb-item active">Data Peserta</li>
     </ol>
   </div><!-- /.col -->
 </div><!-- /.row -->
@@ -24,7 +24,17 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-              <a class="btn btn-success" id="btnAdd" href="{{ Route('tambahKandidat') }}">Tambah Data</a>
+          <div class="btn-group">
+            <a type="button" href="{{ Route('tambahPeserta') }}" class="btn btn-success text-white">Tambah Data</a>
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <span class="sr-only">Toggle Dropdown</span>
+              <div class="dropdown-menu" role="menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-1px, 37px, 0px);">
+                <a class="dropdown-item" href="#">Import XLS</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Download XLS Template</a>
+              </div>
+            </button>
+          </div>
               <button  id="btndelall" class="btn btn-default ml-2"><i class="fas fa-trash"></i> Hapus Semua</button>
           </div>
         <!-- /.card-header -->
@@ -32,26 +42,28 @@
           <table id="example1" class="table table-bordered table-striped table-hover">
             <thead>
               <tr>
-                <th>Nama Kandidat</th>
-                <th>Foto Kandidat</th>
-                <th>Visi</th>
-                <th>Misi</th>
-                <th>kelas</th>
-                <th>Suara</th>
+                <th>Nomor</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Kelas</th>
+                <th>Status</th>
                 <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
-              @foreach ($data as $item)
+              @php
+                  $i = 1;
+              @endphp
+              @foreach ($data as $key => $item)
               <tr>
-                <td>{{ $item["nama_kandidat"] }}</td>
-                <td width="10%"><img src="{{ asset('storage/' . $item->image ) }}" width="70px" alt=""></td>
-                <td width="30%">{{ substr(strip_tags($item->visi), 0, 100) }}{{ strlen($item->visi ) > 100 ? "..." : "" }}</td>
-                <td width="30%">{{ substr(strip_tags($item->misi), 0, 100) }}{{ strlen($item->misi ) > 100 ? "..." : "" }}</td>
+                <td width="5%">{{ $i++ }}</td>
+                <td>{{ $item->name }}</td>
+                <td>{{ $item->email }}</td>
                 <td>{{ $item->class->class_name }}</td>
-                <td>{{ $item["jumlah_pemilih"] }}</td>
+                <td>{{ $item->has_voted == true ? "Sudah Memilih" : "Belum Memilih" }}</td>
                 <td>
                   <a href="{{ Route('editKandidat', ['id' => $item->id]) }}" class="badge badge-success text-white" role="button">Ubah</a>
+                  <a href="{{ Route('editKandidat', ['id' => $item->id]) }}" class="badge badge-warning text-white" role="button">Blacklist</a>
                   <a href="#" class="badge badge-danger btn-del text-white" id="singledel" data-id="{{ $item->id }}" role="button">Hapus</a>
                 </td>
               </tr>
@@ -59,12 +71,11 @@
             </tbody>
             <tfoot>
               <tr>
-                <th>Nama Kandidat</th>
-                <th>Foto Kandidat</th>
-                <th>Visi</th>
-                <th>Misi</th>
-                <th>kelas</th>
-                <th>Suara</th>
+                <th>Nomor</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Kelas</th>
+                <th>Status</th>
                 <th>Aksi</th>
               </tr>
             </tfoot>
@@ -145,7 +156,7 @@
   }).then((result) => {
     if (result.isConfirmed) {
       const id = $(this).data("id");
-      $("#delete").attr('action', 'kandidat/'+id).submit();
+      $("#delete").attr('action', 'peserta/'+id).submit();
     }
   })
   });

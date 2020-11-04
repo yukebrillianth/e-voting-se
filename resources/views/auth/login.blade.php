@@ -17,7 +17,7 @@
           @csrf
   
           @error('email')
-          <div class="text-danger">Email atau kata sandi anda salah!</div>
+          <div class="text-danger">{{$message}}</div>
           @enderror
   
           <div class="input-group mb-3">

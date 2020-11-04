@@ -21,14 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->set('role', ['peserta', 'pengawas', 'super admin'])->default('peserta')->nullable(false);
+            $table->enum('role', ['peserta', 'super admin'])->default('peserta')->nullable(false);
             $table->boolean('has_voted')->default(false);
             $table->rememberToken();
-            $table->unsignedBigInteger('class_id')->nullable();
-            $table->foreign('class_id')
-                ->references('id')
-                ->on('class')
-                ->onCascade('delete');
             $table->timestamps();
         });
 
