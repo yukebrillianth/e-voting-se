@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->set('role', ['peserta', 'pengawas', 'super admin'])->default('peserta')->nullable(false);
-            $table->boolean('have_voted')->default(false);
+            $table->boolean('has_voted')->default(false);
             $table->rememberToken();
             $table->unsignedBigInteger('class_id')->nullable();
             $table->foreign('class_id')

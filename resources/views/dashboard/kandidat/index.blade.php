@@ -22,25 +22,13 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <div class="btn-group" role="group">
-            <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Action &nbsp;
-            </button>
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-              <a class="dropdown-item" id="btnAdd" href="{{ Route('tambahKandidat') }}">Tambah Data</a>
-              <a class="dropdown-item" href="#">Import XLS</a>
-              <a class="dropdown-item" href="#">Import CSV</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Print Out</a>
-            </div>
+              <a class="btn btn-success" id="btnAdd" href="{{ Route('tambahKandidat') }}">Tambah Data</a>
+              <button type="submit" id="btndelall" value="confirm" class="btn btn-default ml-2"><i class="fas fa-trash"></i> Hapus Semua</button>
           </div>
           <form id="deleteAll" method="POST" class="d-inline">
             @method('DELETE')
             @csrf
           </form>
-          <button type="submit" id="btndelall" value="confirm" class="btn btn-default ml-2"><i class="fas fa-trash"></i> Hapus Semua</button>
-        </div>
       
         <!-- /.card-header -->
         <div class="card-body">
@@ -59,17 +47,15 @@
             <tbody>
               @foreach ($data as $item)
               <tr>
-                <td width="10%">{{ $item["nama_kandidat"] }}</td>
+                <td>{{ $item["nama_kandidat"] }}</td>
                 <td width="10%"><img src="{{ asset('storage/' . $item->image ) }}" width="70px" alt=""></td>
-                <td>{{ substr(strip_tags($item->visi), 0, 100) }}{{ strlen($item->visi ) > 100 ? "..." : "" }}</td>
-                <td>{{ substr(strip_tags($item->misi), 0, 100) }}{{ strlen($item->misi ) > 100 ? "..." : "" }}</td>
+                <td width="30%">{{ substr(strip_tags($item->visi), 0, 100) }}{{ strlen($item->visi ) > 100 ? "..." : "" }}</td>
+                <td width="30%">{{ substr(strip_tags($item->misi), 0, 100) }}{{ strlen($item->misi ) > 100 ? "..." : "" }}</td>
                 <td>{{ $item->class->class_name }}</td>
                 <td>{{ $item["jumlah_pemilih"] }}</td>
                 <td>
-                  <a href="{{ Route('showKandidat', ['id' => $item->id]) }}" class="badge badge-success text-white"
-                    role="button">Lihat</a><br>
-                  <a class="badge badge-success text-white" role="button">Edit</a><br>
-                  <a class="badge badge-danger text-white" role="button">Hapus</a>
+                  <a href="{{ Route('editKandidat', ['id' => $item->id]) }}" class="badge badge-success text-white" role="button">Ubah</a>
+                  <a href="#" class="badge badge-danger btn-del text-white" id="singledel" data-id="{{ $item->id }}" role="button">Hapus</a>
                 </td>
               </tr>
               @endforeach
@@ -95,6 +81,10 @@
   <!-- /.row -->
 </div>
 <!-- /.container-fluid -->
+<form id="delete" method="POST"class="d-inline">
+  @method('DELETE')
+  @csrf
+</form>
 @endsection
 @push('scripts')
 <!-- jQuery -->
@@ -104,7 +94,7 @@
 <script src="{{ asset('adminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <script src="{{ asset('adminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('adminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="{{ asset('js/sweetalert2.min.js') }}"></script>
 
 <!-- page script -->
 <script>
@@ -112,12 +102,13 @@
     $("#example1").DataTable({
       "responsive": true,
       "autoWidth": false,
+      "ordering": true,
     });
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
       "searching": false,
-      "ordering": true,
+      "ordering": false,
       "info": true,
       "autoWidth": false,
       "responsive": true,
@@ -140,5 +131,24 @@
     }
   })
   });
+
+  $('.btn-del').click( function() {
+    Swal.fire({
+    title: 'Apakah anda yakin?',
+    text: "Anda tidak akan dapat mengembalikan ini!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Ya, hapus!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const id = $(this).data("id");
+      $("#delete").attr('action', 'kandidat/'+id).submit();
+    }
+  })
+  });
+
+
 </script>
 @endpush

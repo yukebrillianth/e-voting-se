@@ -47,7 +47,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('kandidat/add', [CandidateController::class, 'create'])->name('tambahKandidat');
         Route::post('kandidat/', [CandidateController::class, 'store'])->name('storeKandidat');
         Route::delete('kandidat/', [CandidateController::class, 'deleteAll'])->name('deleteAll');
-        Route::get('kandidat/show/{id}', [CandidateController::class, 'show'])->name('showKandidat');
+        Route::delete('kandidat/{id}', [CandidateController::class, 'destroy'])->name('deleteKandidat');
+        Route::get('kandidat/edit/{id}', [CandidateController::class, 'edit'])->name('editKandidat');
+        Route::put('kandidat/edit/{id}', [CandidateController::class, 'update'])->name('putKandidat');
     });
     Route::get('formulir', [FormController::class, 'index'])->name('formulir');
 });

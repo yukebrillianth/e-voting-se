@@ -18,8 +18,10 @@ class RedirectorController extends Controller
             return redirect()->route('dashboard');
         } elseif (Auth::user()->role == 'pengawas') {
             return redirect()->route('dashboard');
-        } else {
+        } elseif (Auth::user()->role == 'peserta') {
             return redirect()->route('formulir');
+        } else {
+            abort(419);
         }
     }
 }

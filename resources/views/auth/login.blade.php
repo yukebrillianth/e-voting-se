@@ -1,5 +1,7 @@
 @extends('vendor.adminLTE.guest.auth')
 
+@section('title', 'Masuk')
+
 @section('content')
 <div class="login-box">
     <div class="login-logo">

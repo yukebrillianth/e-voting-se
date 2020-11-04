@@ -30,7 +30,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ Route('kandidat') }}" class="nav-link {{ request()->is('dashboard/kandidat', 'dashboard/kandidat/add') ? 'active' : '' }}">
+          <a href="{{ Route('kandidat') }}" class="nav-link {{ request()->is('dashboard/kandidat', 'dashboard/kandidat/add', ) || (Route::currentRouteName() == 'editKandidat') || (Route::currentRouteName() == 'showKandidat') ? 'active' : '' }}">
             <i class="nav-icon fas fa-user-tie"></i>
             <p>
               Data Kandidat
