@@ -9,6 +9,8 @@ use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -39,9 +41,13 @@ Route::get('bantuan', function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [RedirectorController::class, 'index'])->name('/');
     Route::get('/home', [RedirectorController::class, 'index'])->name('home');
-    Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
-    Route::get('dashboard/kandidat', [CandidateController::class, 'index'])->name('kandidat');
-    Route::get('dashboard/kandidat/add', [CandidateController::class, 'add'])->name('tambahKandidat');
-    Route::post('dashboard/kandidat/', [CandidateController::class, 'store'])->name('storeKandidat');
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+        Route::get('kandidat', [CandidateController::class, 'index'])->name('kandidat');
+        Route::get('kandidat/add', [CandidateController::class, 'create'])->name('tambahKandidat');
+        Route::post('kandidat/', [CandidateController::class, 'store'])->name('storeKandidat');
+        Route::delete('kandidat/', [CandidateController::class, 'deleteAll'])->name('deleteAll');
+        Route::get('kandidat/show/{id}', [CandidateController::class, 'show'])->name('showKandidat');
+    });
     Route::get('formulir', [FormController::class, 'index'])->name('formulir');
 });

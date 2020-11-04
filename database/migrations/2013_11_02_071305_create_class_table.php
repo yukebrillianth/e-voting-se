@@ -23,7 +23,7 @@ class CreateClassTable extends Migration
 
         DB::table('class')->insert(
             array(
-                'class_name' => 'Kelas IX-B',
+                'class_name' => 'IX-B',
             )
         );
     }
